@@ -17,7 +17,7 @@ module.exports = function(grunt) {
 				files: [
 					{
 						expand: true,     //Enable dynamic expansion.
-						cwd: 'src/less/',      //Src matches are relative to this path.
+						cwd: '<%= config.webroot %>/less/',      //Src matches are relative to this path.
 						src: ['**/*.less'], //Actual pattern(s) to match.
 						dest: 'src/css/',   //Destination path prefix.
 						ext: '.css',   //Dest filepaths will have this extension.
@@ -63,16 +63,86 @@ module.exports = function(grunt) {
                 // Default livereload listening port is 35729.
                 livereload: 1337
             },
-            css: {
+            less: {
                 files: ['<%= config.webroot %>/less/**/*.less'],
                 tasks: [
-                	'less'
-                ]
+                	'less:development'
+                ],
+                options: {
+                    nospawn: true
+                }
             }
+        },
+        cacheBust: {
+        	options: {
+        		encoding: 'utf8',
+        		algorithm: 'md5',
+        		length: 16,
+        		deleteOriginals: true,
+        		jsonOutput: true,
+        		ignorePatterns: ['test', 'requirejs'],
+        		baseDir: '<%= config.dist %>',
+        		filters: {
+        			'script': [
+        			function() {
+        				return this.attribs['data-main'];
+        			},
+        			function() {
+        				return this.attribs.src;
+        			} 
+        			]
+        		}
+        	},
+        	assets: {
+        		files: [
+	        		{   
+	        			expand: true,
+	        			cwd: '<%= config.dist %>/page/',
+	        			src: ['**/*.html']
+	        		},
+	        		{
+	        			expand: true,
+	        			cwd: '<%= config.dist%>/css/',
+	        			src: ['**/*.css']
+	        		}
+        		]
+        	}
         }
 
 	});
+
+    grunt.event.on('watch', function(action, filepath){
+        // ignore include files, TODO: have naming convention
+        // if an include file has been changed, all files will be re-compiled
+        if(filepath.indexOf('.inc.') > -1)
+            return true;
+
+        // might not be the most efficient way to do this
+        var srcDir = filepath.split('/');
+        var filename = srcDir[srcDir.length - 1];
+        delete srcDir[srcDir.length - 1];
+        srcDir = srcDir.join('/');
+        var destDir = srcDir.replace(/less/g, 'css');
+
+        grunt.config('less.development.files', [{
+            src: filename,
+            dest: destDir,
+            expand: true,
+            cwd: srcDir,
+            ext: '.css',
+            extDot: 'last'
+        }]);
+    });
+
+
     grunt.loadNpmTasks('grunt-contrib-less');
     grunt.loadNpmTasks('grunt-contrib-requirejs');
     grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-cache-bust');
+
+    grunt.registerTask('dist', [
+        'requirejs',
+        'cacheBust'
+    ]);
+
 };

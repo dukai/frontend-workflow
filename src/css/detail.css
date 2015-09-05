@@ -9,4 +9,5 @@ body .box {
 }
 .box.red {
   background: #f00;
+  position: relative;
 }
