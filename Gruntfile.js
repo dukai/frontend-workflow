@@ -132,12 +132,9 @@ module.exports = function(grunt) {
 	});
 
     grunt.event.on('watch', function(action, filepath){
-        // ignore include files, TODO: have naming convention
-        // if an include file has been changed, all files will be re-compiled
         if(filepath.indexOf('.inc.') > -1)
             return true;
 
-        // might not be the most efficient way to do this
         var srcDir = filepath.split('/');
         var filename = srcDir[srcDir.length - 1];
         delete srcDir[srcDir.length - 1];
@@ -166,5 +163,4 @@ module.exports = function(grunt) {
         'cacheBust',
         'replace'
     ]);
-
 };
