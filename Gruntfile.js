@@ -111,7 +111,7 @@ module.exports = function(grunt) {
                 options: {
                     patterns: [
                     {
-                        match: /([\("'])((\.+\/)+)(.+)/g,
+                        match: /([\("'])((\.+\/)+)(.+?[\("'])/ig,
                         replacement: function(){
                            return arguments[1] + '/static/' + arguments[4];
                         }
@@ -121,9 +121,9 @@ module.exports = function(grunt) {
                 files: [
                 {
                     expand: true, 
-                    flatten: true, 
                     cwd: '<%= config.dist %>',
                     src: ['page/**/*.html', 'css/**/*.css'], 
+                    dest: '<%= config.dist %>'
                 }
                 ]
             }
@@ -163,7 +163,8 @@ module.exports = function(grunt) {
 
     grunt.registerTask('dist', [
         'requirejs',
-        'cacheBust'
+        'cacheBust',
+        'replace'
     ]);
 
 };
