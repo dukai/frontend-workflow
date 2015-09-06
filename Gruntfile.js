@@ -40,7 +40,8 @@ module.exports = function(grunt) {
                         {
                             name: 'rs-config',
                             include: [
-                                'jquery'
+                                'jquery',
+                                'rs-config'
                             ]
                         },
 
@@ -80,33 +81,52 @@ module.exports = function(grunt) {
         		length: 16,
         		deleteOriginals: true,
         		jsonOutput: true,
-        		ignorePatterns: ['test', 'requirejs'],
+        		ignorePatterns: ['test', 'require.js'],
         		baseDir: '<%= config.dist %>',
-        		filters: {
-        			'script': [
-        			function() {
-        				return this.attribs['data-main'];
-        			},
-        			function() {
-        				return this.attribs.src;
-        			} 
-        			]
-        		}
-        	},
+                cdnPath: 'http://yjb-static.youku.com/route/static/',
+                filters: {
+                    'script': [
+                        function() {
+                            return this.attribs['data-main'];
+                        },
+                        function() {
+                            return this.attribs.src;
+                        }
+                    ]
+                }
+            },
         	assets: {
         		files: [
 	        		{   
 	        			expand: true,
-	        			cwd: '<%= config.dist %>/page/',
-	        			src: ['**/*.html']
-	        		},
-	        		{
-	        			expand: true,
-	        			cwd: '<%= config.dist%>/css/',
-	        			src: ['**/*.css']
+	        			cwd: '<%= config.dist %>',
+	        			src: ['css/**/*.css', 'page/**/*.html']
 	        		}
-        		]
+                  ]
         	}
+        },
+
+        replace: {
+            dist: {
+                options: {
+                    patterns: [
+                    {
+                        match: /([\("'])((\.+\/)+)(.+)/g,
+                        replacement: function(){
+                           return arguments[1] + '/static/' + arguments[4];
+                        }
+                    }
+                    ]
+                },
+                files: [
+                {
+                    expand: true, 
+                    flatten: true, 
+                    cwd: '<%= config.dist %>',
+                    src: ['page/**/*.html', 'css/**/*.css'], 
+                }
+                ]
+            }
         }
 
 	});
@@ -139,6 +159,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-requirejs');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-cache-bust');
+    grunt.loadNpmTasks('grunt-replace');
 
     grunt.registerTask('dist', [
         'requirejs',

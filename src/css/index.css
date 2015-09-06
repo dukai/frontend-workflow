@@ -22,5 +22,5 @@ body .box {
   position: relative;
 }
 .bg {
-  background: url(../images/1.jpg);
+  background: url("../images/1.jpg");
 }
