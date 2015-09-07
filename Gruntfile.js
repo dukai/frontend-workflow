@@ -24,7 +24,23 @@ module.exports = function(grunt) {
 						extDot: 'first'   //Extensions in filenames begin after the first dot
 					},
 				],
-			}
+			},
+            dist: {
+                options: {
+                    paths: ["less"],
+                    compress: true
+                },
+                files: [
+                    {
+                        expand: true,     //Enable dynamic expansion.
+                        cwd: '<%= config.webroot %>/less/',      //Src matches are relative to this path.
+                        src: ['**/*.less'], //Actual pattern(s) to match.
+                        dest: 'src/css/',   //Destination path prefix.
+                        ext: '.css',   //Dest filepaths will have this extension.
+                        extDot: 'first'   //Extensions in filenames begin after the first dot
+                    },
+                ],
+            }
 		},
 
 		requirejs: {
@@ -34,7 +50,7 @@ module.exports = function(grunt) {
 					baseUrl: "js",
 					dir: '<%= config.dist %>',
 					mainConfigFile: '<%= config.webroot %>/js/rs-config.js',
-					optimize: 'none',
+					// optimize: 'none',
 					skipDirOptimize: true,
 					modules: [
                         {
@@ -81,7 +97,7 @@ module.exports = function(grunt) {
         		length: 16,
         		deleteOriginals: true,
         		jsonOutput: true,
-        		ignorePatterns: ['test', 'require.js'],
+        		ignorePatterns: ['test', 'require.js', 'bootstrap'],
         		baseDir: '<%= config.dist %>',
                 cdnPath: 'http://yjb-static.youku.com/route/static/',
                 filters: {
@@ -159,6 +175,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-replace');
 
     grunt.registerTask('dist', [
+        'less',
         'requirejs',
         'cacheBust',
         'replace'
