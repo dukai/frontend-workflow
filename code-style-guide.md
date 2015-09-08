@@ -12,15 +12,15 @@
 8.	避免使用`with`函数
 9.	只在必要的时候（遍历对象时）使用for-in循环。对数组使用如下方式遍历。  
 
-    for(var i = 0, len = array.length; i < len; i++){  
-        //do something  
-    }
+        for(var i = 0, len = array.length; i < len; i++){  
+            //do something  
+        }
 
 10.	避免使用多行字符串声明，使用字符串拼接来代替。
 11.	使用字面量来实例化数组和对象。  
 
-    var array = [1, 2, 3];  
-    var obj = {a: ‘xx’, b: ‘xx’}
+        var array = [1, 2, 3];  
+        var obj = {a: ‘xx’, b: ‘xx’}
 
 12.	禁止修改内建的对象prototype
 13.	避免使用ie条件注释
@@ -33,32 +33,32 @@
 3.	如果函数接受一系列的可变参数，应当在传参处添加`var_args`，在函数体内部则使用`arguments`对象。
 4.	避免使用getter和setter，使用赋值和取值方法代替
 
-    getYourProperty()  
-    setYourProperty(value)
+        getYourProperty()  
+        setYourProperty(value)
 
 5.	尽量延迟实例实例化的时间。尽量明确变量的作用域。
 6.	花括号{}的使用，开始的花括号总是与它开始时的代码在同一行。
 
-    if(something){
-    	//….
-    } else {
-    	//…..
-    }
+        if(something){
+        	//….
+        } else {
+        	//…..
+        }
 
 7.	数组和对象的初始化  
 
-          var arr = [1, 2, 3];  //  [后面, ]前面都没空格.  
-          var obj = {a: 1, b: 2, c: 3};  // {后面, }前面都没空格.  
-          var arr = [  
-            1,  
-            2,  
-            3  
-          ];  
-          var obj = {  
-            a: 1,  
-            bb: 2,  
-            ccc: 3  
-          };  
+        var arr = [1, 2, 3];  //  [后面, ]前面都没空格.  
+        var obj = {a: 1, b: 2, c: 3};  // {后面, }前面都没空格.  
+        var arr = [  
+          1,  
+          2,  
+          3  
+        ];  
+        var obj = {  
+          a: 1,  
+          bb: 2,  
+          ccc: 3  
+        };  
 
 8. 传递匿名函数
 
