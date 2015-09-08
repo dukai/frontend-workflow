@@ -11,14 +11,14 @@
 7.	避免使用`eval`函数
 8.	避免使用`with`函数
 9.	只在必要的时候（遍历对象时）使用for-in循环。对数组使用如下方式遍历。  
-    
+
     for(var i = 0, len = array.length; i < len; i++){  
         //do something  
     }
 
 10.	避免使用多行字符串声明，使用字符串拼接来代替。
 11.	使用字面量来实例化数组和对象。  
-    
+
     var array = [1, 2, 3];  
     var obj = {a: ‘xx’, b: ‘xx’}
 
@@ -38,7 +38,7 @@
 
 5.	尽量延迟实例实例化的时间。尽量明确变量的作用域。
 6.	花括号{}的使用，开始的花括号总是与它开始时的代码在同一行。
-    
+
     if(something){
     	//….
     } else {
@@ -46,34 +46,34 @@
     }
 
 7.	数组和对象的初始化  
-    
-    var arr = [1, 2, 3];  //  [后面 ]前面都没空格.  
-    var obj = {a: 1, b: 2, c: 3};  // {后面 }前面都没空格.  
-    var arr = [  
-        1,  
-        2,  
-        3  
-    ];  
-    var obj = {  
-        a: 1,  
-        bb: 2,  
-        ccc: 3  
-    };  
+
+          var arr = [1, 2, 3];  //  [后面, ]前面都没空格.  
+          var obj = {a: 1, b: 2, c: 3};  // {后面, }前面都没空格.  
+          var arr = [  
+            1,  
+            2,  
+            3  
+          ];  
+          var obj = {  
+            a: 1,  
+            bb: 2,  
+            ccc: 3  
+          };  
 
 8. 传递匿名函数
-    
-    foo(function(param1, param2){
-    	//your code
-    });
- 
+
+        foo(function(param1, param2){
+          //your code
+        });
+
 9. 代码内部小功能区块添加空行分隔
 
-    doButtonEventBind();
-    doButtonWaitingState();
-    doButtonHide();
-    
-    doFormSubmit();
-    doCheckForm();
+        doButtonEventBind();
+        doButtonWaitingState();
+        doButtonHide();
+
+        doFormSubmit();
+        doCheckForm();
 
 10. 字符串声明使用'代替"
 
@@ -82,40 +82,40 @@
 1. 以 `/**` 开始将作为JSDoc解析的注释内容，其他的注释方式均不解析(`//`, `/*`, `/***`)。
 2. 简单的说明
 
-    /** 这里是对函数的描述 */
-    function foo(){
-        //do something
-    }
+        /** 这里是对函数的描述 */
+        function foo(){
+            //do something
+        }
 3. 指定构造函数
 
-    /**
-     * 图书对象
-     * @constructor
-     */
-    function Book(){
-        //do something
-    }
-    
+        /**
+         * 图书对象
+         * @constructor
+         */
+        function Book(){
+            //do something
+        }
+
 4. 指定更多内容
 
-    /**
-     * 图书对象
-     * @constructor
-     * @param {string} title - title of the book
-     * @param {string} author - author of the book
-     */
-    function Book(title, author){
-        //do something
-    }
+        /**
+         * 图书对象
+         * @constructor
+         * @param {string} title - title of the book
+         * @param {string} author - author of the book
+         */
+        function Book(title, author){
+            //do something
+        }
 
 5. 描述返回值
 
-    /**
-     * 相加
-     * @param {int} a - first number
-     * @param {int} b - second number
-     * @return {int}
-     */
-    function add(a, b){
-        return a+b;
-    }
+        /**
+         * 相加
+         * @param {int} a - first number
+         * @param {int} b - second number
+         * @return {int}
+         */
+        function add(a, b){
+            return a+b;
+        }
