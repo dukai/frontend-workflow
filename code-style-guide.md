@@ -1,4 +1,4 @@
-# Code Style Sample #
+# Code Style Guide #
 
 ## JavaScript语言规则 ##
 
