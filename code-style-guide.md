@@ -1,4 +1,4 @@
-# JavaScript Code Style Sample #
+# Code Style Sample #
 
 ## JavaScript语言规则 ##
 
@@ -119,3 +119,20 @@
         function add(a, b){
             return a+b;
         }
+
+## HTML 规范 ##
+
+1. 页头
+
+        <!doctype html>
+
+2. 编码
+
+        <meta charset="utf-8">
+
+3. script标签不需加type或者language，link或style标签不需加type
+
+        <script src="..."></script>
+        <script></script>
+        <link rel="stylesheet" href="...">
+        <style></style>
