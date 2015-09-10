@@ -1,3 +1,5 @@
+var path = require('path');
+
 module.exports = function(grunt) {
 
 	var config = {
@@ -50,24 +52,18 @@ module.exports = function(grunt) {
 					baseUrl: "js",
 					dir: '<%= config.dist %>',
 					mainConfigFile: '<%= config.webroot %>/js/rs-config.js',
-					// optimize: 'none',
+					optimize: 'none',
 					skipDirOptimize: true,
+                    fileExclusionRegExp: /^\.|\.less$/,
 					modules: [
-                        {
-                            name: 'rs-config',
-                            include: [
-                                'jquery',
-                                'rs-config'
-                            ]
-                        },
 
                         {
                             name: 'app/page-main',
-                            exclude: ['rs-config']
+                            exclude: ['rs-config', 'jquery']
                         },
                         {
                             name: 'app/page-sub',
-                            exclude: ['rs-config']
+                            exclude: ['rs-config', 'jquery']
                         }
                     ]
 				}
@@ -97,9 +93,8 @@ module.exports = function(grunt) {
         		length: 16,
         		deleteOriginals: true,
         		jsonOutput: true,
-        		ignorePatterns: ['test', 'require.js', 'bootstrap'],
+        		ignorePatterns: ['test', 'require.js', 'bootstrap', 'jquery'],
         		baseDir: '<%= config.dist %>',
-                cdnPath: 'http://yjb-static.youku.com/route/static/',
                 filters: {
                     'script': [
                         function() {
@@ -151,10 +146,10 @@ module.exports = function(grunt) {
         if(filepath.indexOf('.inc.') > -1)
             return true;
 
-        var srcDir = filepath.split('/');
+        var srcDir = filepath.split(path.sep);
         var filename = srcDir[srcDir.length - 1];
         delete srcDir[srcDir.length - 1];
-        srcDir = srcDir.join('/');
+        srcDir = srcDir.join(path.sep);
         var destDir = srcDir.replace(/less/g, 'css');
 
         grunt.config('less.development.files', [{

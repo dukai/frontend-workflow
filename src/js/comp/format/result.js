@@ -1,7 +1,10 @@
 define(function(require, exports, module) {
-
-	module.exports = function(str){
+	var msg = require('./msg');
+	module.exports = function(str, type){
 		console.log('exec result');
-		return "RESULT: " + str;
+
+		type = type ? type: 'msg';
+
+		return msg[type](str);
 	}
 })

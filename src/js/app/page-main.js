@@ -1,10 +1,7 @@
-requirejs.config({
-    baseUrl: '../js',
-    paths: {
-        jquery: 'lib/jquery-1.11.3.min'
-    }
-});
+require(['comp/format/result', 'comp/math/plus'],function(result, plus){
 
-requirejs(['comp/format/result', 'comp/math/plus', 'jquery'],function(result, plus){
+	var $ = require('jquery');
 	console.log('add', result(plus(1, 2)));
+
+	console.log(result($, 'warning'));
 })
