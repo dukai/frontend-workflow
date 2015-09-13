@@ -58,21 +58,6 @@ module.exports = function(grunt) {
 					mainConfigFile: '<%= config.webroot %>/js/rs-config.js',
 					optimize: 'none',
 					skipDirOptimize: true,
-<<<<<<< HEAD
-					modules: [{
-						name: 'rs-config',
-						include: ['jquery', 'rs-config']
-					},
-
-					{
-						name: 'app/page-main',
-						exclude: ['rs-config']
-					},
-					{
-						name: 'app/page-sub',
-						exclude: ['rs-config']
-					}]
-=======
                     fileExclusionRegExp: /^\.|\.less$/,
 					modules: [
 
@@ -85,55 +70,11 @@ module.exports = function(grunt) {
                             exclude: ['rs-config', 'jquery']
                         }
                     ]
->>>>>>> 1308ce0c380325bd72bdd3b9e16f3d49b173df98
 				}
 			}
 		},
 
 		watch: {
-<<<<<<< HEAD
-			options: {
-				// Reload assets live in the browser.
-				// Default livereload listening port is 35729.
-				livereload: 1337
-			},
-			less: {
-				files: ['<%= config.webroot %>/less/**/*.less'],
-				tasks: ['less:development'],
-				options: {
-					nospawn: true
-				}
-			}
-		},
-		cacheBust: {
-			options: {
-				encoding: 'utf8',
-				algorithm: 'md5',
-				length: 16,
-				deleteOriginals: true,
-				jsonOutput: true,
-				ignorePatterns: ['test', 'require.js'],
-				baseDir: '<%= config.dist %>',
-				cdnPath: 'http://yjb-static.youku.com/route/static/',
-				filters: {
-					'script': [
-					function() {
-						return this.attribs['data-main'];
-					},
-					function() {
-						return this.attribs.src;
-					}]
-				}
-			},
-			assets: {
-				files: [{
-					expand: true,
-					cwd: '<%= config.dist %>',
-					src: ['css/**/*.css', 'page/**/*.html']
-				}]
-			}
-		},
-=======
             options: {
                 // Reload assets live in the browser.
                 // Default livereload listening port is 35729.
@@ -179,7 +120,6 @@ module.exports = function(grunt) {
                   ]
         	}
         },
->>>>>>> 1308ce0c380325bd72bdd3b9e16f3d49b173df98
 
 		bust_requirejs_cache: {
 			default:{
@@ -217,19 +157,6 @@ module.exports = function(grunt) {
 
 	});
 
-<<<<<<< HEAD
-	grunt.event.on('watch', function(action, filepath) {
-		// ignore include files, TODO: have naming convention
-		// if an include file has been changed, all files will be re-compiled
-		if (filepath.indexOf('.inc.') > - 1) return true;
-
-		// might not be the most efficient way to do this
-		var srcDir = filepath.split('/');
-		var filename = srcDir[srcDir.length - 1];
-		delete srcDir[srcDir.length - 1];
-		srcDir = srcDir.join('/');
-		var destDir = srcDir.replace(/less/g, 'css');
-=======
     grunt.event.on('watch', function(action, filepath){
         if(filepath.indexOf('.inc.') > -1)
             return true;
@@ -239,7 +166,6 @@ module.exports = function(grunt) {
         delete srcDir[srcDir.length - 1];
         srcDir = srcDir.join(path.sep);
         var destDir = srcDir.replace(/less/g, 'css');
->>>>>>> 1308ce0c380325bd72bdd3b9e16f3d49b173df98
 
 		grunt.config('less.development.files', [{
 			src: filename,
@@ -261,15 +187,4 @@ module.exports = function(grunt) {
 	grunt.registerTask('dist', ['less', 'requirejs', 'cacheBust', 'bust_requirejs_cache']);
 	grunt.registerTask('release', ['requirejs', 'cacheBust', 'replace']);
 
-<<<<<<< HEAD
 };
-
-=======
-    grunt.registerTask('dist', [
-        'less',
-        'requirejs',
-        'cacheBust',
-        'replace'
-    ]);
-};
->>>>>>> 1308ce0c380325bd72bdd3b9e16f3d49b173df98
