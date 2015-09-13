@@ -6,6 +6,7 @@ body .box {
   width: 100px;
   height: 100px;
   background: #ff0000;
+  position: relative;
 }
 .box.green {
   width: 200px;
@@ -24,8 +25,3 @@ body .box {
 .bg {
   background: url("../images/1.jpg");
 }
-
-.bg2 {
-  background: url("../images/1.jpg");
-}
-
