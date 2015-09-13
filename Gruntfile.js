@@ -1,3 +1,5 @@
+var path = require('path');
+
 module.exports = function(grunt) {
 
 	var config = {
@@ -28,7 +30,23 @@ module.exports = function(grunt) {
 					extDot: 'first' //Extensions in filenames begin after the first dot
 				},
 				],
-			}
+			},
+            dist: {
+                options: {
+                    paths: ["less"],
+                    compress: true
+                },
+                files: [
+                    {
+                        expand: true,     //Enable dynamic expansion.
+                        cwd: '<%= config.webroot %>/less/',      //Src matches are relative to this path.
+                        src: ['**/*.less'], //Actual pattern(s) to match.
+                        dest: 'src/css/',   //Destination path prefix.
+                        ext: '.css',   //Dest filepaths will have this extension.
+                        extDot: 'first'   //Extensions in filenames begin after the first dot
+                    },
+                ],
+            }
 		},
 
 		requirejs: {
@@ -40,6 +58,7 @@ module.exports = function(grunt) {
 					mainConfigFile: '<%= config.webroot %>/js/rs-config.js',
 					optimize: 'none',
 					skipDirOptimize: true,
+<<<<<<< HEAD
 					modules: [{
 						name: 'rs-config',
 						include: ['jquery', 'rs-config']
@@ -53,11 +72,26 @@ module.exports = function(grunt) {
 						name: 'app/page-sub',
 						exclude: ['rs-config']
 					}]
+=======
+                    fileExclusionRegExp: /^\.|\.less$/,
+					modules: [
+
+                        {
+                            name: 'app/page-main',
+                            exclude: ['rs-config', 'jquery']
+                        },
+                        {
+                            name: 'app/page-sub',
+                            exclude: ['rs-config', 'jquery']
+                        }
+                    ]
+>>>>>>> 1308ce0c380325bd72bdd3b9e16f3d49b173df98
 				}
 			}
 		},
 
 		watch: {
+<<<<<<< HEAD
 			options: {
 				// Reload assets live in the browser.
 				// Default livereload listening port is 35729.
@@ -99,6 +133,53 @@ module.exports = function(grunt) {
 				}]
 			}
 		},
+=======
+            options: {
+                // Reload assets live in the browser.
+                // Default livereload listening port is 35729.
+                livereload: 1337
+            },
+            less: {
+                files: ['<%= config.webroot %>/less/**/*.less'],
+                tasks: [
+                	'less:development'
+                ],
+                options: {
+                    nospawn: true
+                }
+            }
+        },
+        cacheBust: {
+        	options: {
+        		encoding: 'utf8',
+        		algorithm: 'md5',
+        		length: 16,
+        		deleteOriginals: true,
+        		jsonOutput: true,
+        		ignorePatterns: ['test', 'require.js', 'bootstrap', 'jquery'],
+        		baseDir: '<%= config.dist %>',
+                filters: {
+                    'script': [
+                        function() {
+                            return this.attribs['data-main'];
+                        },
+                        function() {
+                            return this.attribs.src;
+                        }
+                    ]
+                }
+            },
+        	assets: {
+        		files: [
+	        		{   
+	        			expand: true,
+	        			cwd: '<%= config.dist %>',
+	        			src: ['css/**/*.css', 'page/**/*.html']
+	        		}
+                  ]
+        	}
+        },
+>>>>>>> 1308ce0c380325bd72bdd3b9e16f3d49b173df98
 
 		bust_requirejs_cache: {
 			default:{
@@ -136,6 +217,7 @@ module.exports = function(grunt) {
 
 	});
 
+<<<<<<< HEAD
 	grunt.event.on('watch', function(action, filepath) {
 		// ignore include files, TODO: have naming convention
 		// if an include file has been changed, all files will be re-compiled
@@ -147,6 +229,17 @@ module.exports = function(grunt) {
 		delete srcDir[srcDir.length - 1];
 		srcDir = srcDir.join('/');
 		var destDir = srcDir.replace(/less/g, 'css');
+=======
+    grunt.event.on('watch', function(action, filepath){
+        if(filepath.indexOf('.inc.') > -1)
+            return true;
+
+        var srcDir = filepath.split(path.sep);
+        var filename = srcDir[srcDir.length - 1];
+        delete srcDir[srcDir.length - 1];
+        srcDir = srcDir.join(path.sep);
+        var destDir = srcDir.replace(/less/g, 'css');
+>>>>>>> 1308ce0c380325bd72bdd3b9e16f3d49b173df98
 
 		grunt.config('less.development.files', [{
 			src: filename,
@@ -168,5 +261,15 @@ module.exports = function(grunt) {
 	grunt.registerTask('dist', ['less', 'requirejs', 'cacheBust', 'bust_requirejs_cache']);
 	grunt.registerTask('release', ['requirejs', 'cacheBust', 'replace']);
 
+<<<<<<< HEAD
 };
 
+=======
+    grunt.registerTask('dist', [
+        'less',
+        'requirejs',
+        'cacheBust',
+        'replace'
+    ]);
+};
+>>>>>>> 1308ce0c380325bd72bdd3b9e16f3d49b173df98
