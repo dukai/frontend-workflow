@@ -32,9 +32,10 @@
 2.	函数可选参数采用`opt_`开头
 3.	如果函数接受一系列的可变参数，应当在传参处添加`var_args`，在函数体内部则使用`arguments`对象。
 4.	避免使用getter和setter，使用赋值和取值方法代替
-
+```JavaScript
         getYourProperty()  
         setYourProperty(value)
+```
 
 5.	尽量延迟实例实例化的时间。尽量明确变量的作用域。
 6.	花括号{}的使用，开始的花括号总是与它开始时的代码在同一行。
@@ -76,6 +77,8 @@
         doCheckForm();
 
 10. 字符串声明使用'代替"
+11. 可实例化的类对象采用首字母大写的驼峰式命名方式`MyClassName`
+12. 文件名采用全部小写，单词以中划线风格的风格 `my-custom-module.js`
 
 ## JSDoc基本用法 ##
 
