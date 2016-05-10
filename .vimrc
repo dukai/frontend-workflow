@@ -52,6 +52,7 @@ Plugin 'vim-scripts/JavaScript-Indent'
 Plugin 'vim-airline/vim-airline'
 Plugin 'Shougo/neocomplete.vim'
 Plugin 'scrooloose/nerdtree'
+Plugin 'groenewege/vim-less'
 
 
 
