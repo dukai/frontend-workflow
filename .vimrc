@@ -53,6 +53,8 @@ Plugin 'vim-airline/vim-airline'
 Plugin 'Shougo/neocomplete.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'groenewege/vim-less'
+Plugin 'vim-scripts/HTML-AutoCloseTag'
+Plugin 'Townk/vim-autoclose'
 
 
 
