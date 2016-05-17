@@ -1,4 +1,5 @@
 set nu
+set rnu
 "控制台模式下输入法无法输入部分汉字，虽然定义为cp936输入正常，但是太多插件是根据utf-8设计的，如果使用其他值会导致错误。此外cmder中的vim，中文光标位置不正确。
 set encoding=utf-8
 "控制台显示方式定义为cp936
@@ -51,6 +52,7 @@ Plugin 'vim-scripts/JavaScript-Indent'
 Plugin 'vim-airline/vim-airline'
 Plugin 'Shougo/neocomplete.vim'
 Plugin 'scrooloose/nerdtree'
+Plugin 'groenewege/vim-less'
 
 
 
@@ -72,4 +74,4 @@ let g:NERDTreeDirArrowCollapsible = '-'
 map <F4> :NERDTreeToggle<CR>
 
 let g:neocomplete#enable_at_startup = 1
-
+let NERDTreeShowLineNumbers=1 
