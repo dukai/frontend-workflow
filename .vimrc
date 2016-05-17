@@ -19,6 +19,9 @@ set softtabstop=4
 set smarttab
 set hlsearch
 set incsearch
+"设置airline bar 背景色
+set t_Co=256
+
 set runtimepath^=~/.vim/bundle/ctrlp.vim
 set runtimepath^=~/.vim/bundle/vim-airline
 
